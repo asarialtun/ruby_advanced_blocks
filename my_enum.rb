@@ -32,7 +32,7 @@ module Enumerable
     def my_all?
     	for i in self
     		i = yield i if block_given?
-			return false unless i
+			  return false unless i
     	end
     	return true
     end
@@ -65,5 +65,18 @@ module Enumerable
 	    end
 	    return count
     end
+    
+    def my_map
+      return self unless block_given?
+      arr = Array.new
+      
+      for i in self
+        i = yield i
+        arr << i
+      end
+      return arr
+      
+    end
+    
     
 end
