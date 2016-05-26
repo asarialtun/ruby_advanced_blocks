@@ -78,5 +78,21 @@ module Enumerable
       
     end
     
+    def my_inject(offset=nil)
+      if block_given?
+        offset ? sum=offset : sum=self[0]
+        for i in self[1..-1]
+          sum= yield sum,i
+        end
+      end
+      return sum
+    end
     
 end
+
+def multiply_els(array)
+  result = array.my_inject{|sum,item| sum * item}
+  return result
+end
+puts multiply_els([2,4,5])
+
