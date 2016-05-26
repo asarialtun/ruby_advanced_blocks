@@ -66,16 +66,14 @@ module Enumerable
 	    return count
     end
     
-    def my_map
+    def my_map(&block)
       return self unless block_given?
       arr = Array.new
-      
-      for i in self
-        i = yield i
-        arr << i
-      end
+        for i in self
+          i = yield i
+          arr << i
+        end  
       return arr
-      
     end
     
     def my_inject(offset=nil)
@@ -96,3 +94,9 @@ def multiply_els(array)
 end
 puts multiply_els([2,4,5])
 
+my_proc = Proc.new{ |i| i *= 2 }
+puts "if only a proc is provided the output is as follows"
+puts [1,2,3].my_map(&my_proc).inspect 
+puts "if only a block is provided the output is as follows"
+puts [1,2,3].my_map {|i| i *= 3}.inspect
+puts "the program won't compile if both proc and block is provided, so skipping this assignment"
